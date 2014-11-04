@@ -27,7 +27,7 @@ public class DepartamentoDAO {
 
 	public List<Departamento> todosOsDepartamentos() {
 		try {
-			return this.manager.createQuery("select d from Departamento d join fetch d.empregados",
+			return this.manager.createQuery("select distinct d from Departamento d left join fetch d.empregados",
 					Departamento.class).getResultList();
 		} catch (NoResultException e) {
 			return null;
