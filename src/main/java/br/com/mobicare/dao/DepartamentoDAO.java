@@ -27,7 +27,7 @@ public class DepartamentoDAO {
 
 	public List<Departamento> todosOsDepartamentos() {
 		try {
-			return this.manager.createQuery("select d from Departamento d",
+			return this.manager.createQuery("select d from Departamento d join fetch d.empregados",
 					Departamento.class).getResultList();
 		} catch (NoResultException e) {
 			return null;
@@ -56,7 +56,7 @@ public class DepartamentoDAO {
 		}
 	}
 
-	public void removerDepartamento(Departamento departamento) {
+	public void deletar(Departamento departamento) {
 		this.manager.remove(departamento);
 	}
 }
