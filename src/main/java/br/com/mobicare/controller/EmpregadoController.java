@@ -52,4 +52,16 @@ public class EmpregadoController {
 		empregadoDAO.salvar(empregado);
 		return "home";
 	}
+	
+	@Transactional
+	@RequestMapping("/listarEmpregados")
+	public ModelAndView listarEmpregados(){
+		ModelAndView mv = new ModelAndView("empregado/lista");
+		
+		EmpregadoDAO empregadoDAO = appContext.getBean(EmpregadoDAO.class);
+		List<Empregado> empregados = empregadoDAO.todosOsEmpregados();
+		
+		mv.addObject("empregados", empregados);
+		return mv;
+	}
 }
