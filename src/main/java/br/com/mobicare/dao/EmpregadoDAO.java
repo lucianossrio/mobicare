@@ -19,9 +19,9 @@ public class EmpregadoDAO {
 
 	public void salvar(Empregado empregado) {
 		if (empregado.getId() != null) {
-			this.manager.persist(empregado);
-		} else {
 			this.manager.merge(empregado);
+		} else {
+			this.manager.persist(empregado);
 		}
 
 	}

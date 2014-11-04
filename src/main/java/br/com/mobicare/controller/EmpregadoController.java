@@ -41,14 +41,30 @@ public class EmpregadoController {
 		return mv;
 	}
 	
+	@RequestMapping("/editarEmpregado")
+	public ModelAndView editarEmpregado(Empregado empregado){
+		ModelAndView mv = new ModelAndView("empregado/formulario");
+		
+		EmpregadoDAO empregadoDAO = appContext.getBean(EmpregadoDAO.class);
+		empregado = empregadoDAO.buscarEmpregadoPorId(empregado.getId());
+		
+		DepartamentoDAO departamentoDAO = appContext.getBean(DepartamentoDAO.class);
+		List<Departamento> departamentos = departamentoDAO.todosOsDepartamentos();
+		
+		mv.addObject("departamentos", departamentos);
+		mv.addObject("empregado", empregado);
+		return mv;
+	}
+	
 	@Transactional
-	@RequestMapping("/adicionarEmpregado")
-	public String adicionarEmpregado(@Valid Empregado empregado, BindingResult result){
+	@RequestMapping("/salvarEmpregado")
+	public String salvarEmpregado(@Valid Empregado empregado, BindingResult result){
 		
 		if(result.hasErrors()){
-			System.out.println(result.getErrorCount());
+			System.out.println(result.getFieldError().getDefaultMessage());
 		}
 		EmpregadoDAO empregadoDAO = appContext.getBean(EmpregadoDAO.class);
+		
 		empregadoDAO.salvar(empregado);
 		return "redirect:listarEmpregados";
 	}

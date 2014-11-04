@@ -8,8 +8,10 @@
 <title>Novo Empregado</title>
 </head>
 <body>
-	<form action="adicionarEmpregado" method="post">
-		Nome: <input type="text" name="nome"> <br /> 
+	<form action="salvarEmpregado" method="post">
+		<input type="hidden" name="id" value="${empregado.id}" />
+	
+		Nome: <input type="text" name="nome" value="${empregado.nome}"> <br /> 
 		
 		Departamento: <select id="departamento" name="departamento">
 			<c:forEach items="${departamentos}" var="departamento">
