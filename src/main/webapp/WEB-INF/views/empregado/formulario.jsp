@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,12 +8,11 @@
 <title>Novo Empregado</title>
 </head>
 <body>
-	<form action="adicionarEmpregado" name="Empregado" method="POST">
-		Nome: <input type="text" name="nome"> <br />
-		Departamento:
-		<select
-			id="departamento" name="departamento">
-			<c:forEach var="departamento" items="${departamentos}">
+	<form action="adicionarEmpregado" method="post">
+		Nome: <input type="text" name="nome"> <br /> 
+		
+		Departamento: <select id="departamento" name="departamento">
+			<c:forEach items="${departamentos}" var="departamento">
 				<option value="${departamento.id}"
 					<c:if test="${departamento.id eq empregado.departamento.id}">
 							 selected="selected" 
@@ -21,8 +21,7 @@
 				</option>
 
 			</c:forEach>
-		</select><br>
-		<input type="submit" value="Salvar"/>
+		</select><br> <input type="submit" value="Salvar" />
 	</form>
 </body>
 </html>

@@ -4,18 +4,17 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
 
 import br.com.mobicare.modelo.Departamento;
-import br.com.mobicare.modelo.Empregado;
-import br.com.mobicare.util.JPAUtil;
 
+@Repository
 public class DepartamentoDAO {
 
+	@PersistenceContext
 	private EntityManager manager;
-
-	public DepartamentoDAO(EntityManager manager) {
-		this.manager = manager;
-	}
 
 	public void salvar(Departamento departamento) {
 		if (departamento.getId() == null) {
