@@ -50,7 +50,7 @@ public class EmpregadoController {
 		}
 		EmpregadoDAO empregadoDAO = appContext.getBean(EmpregadoDAO.class);
 		empregadoDAO.salvar(empregado);
-		return "home";
+		return "redirect:listarEmpregados";
 	}
 	
 	@Transactional
@@ -63,5 +63,15 @@ public class EmpregadoController {
 		
 		mv.addObject("empregados", empregados);
 		return mv;
+	}
+	
+	@Transactional
+	@RequestMapping("/excluirEmpregado")
+	public String excluirEmpregado(Empregado empregado){
+		EmpregadoDAO empregadoDAO = appContext.getBean(EmpregadoDAO.class);
+		empregado = empregadoDAO.buscarEmpregadoPorId(empregado.getId());
+		
+		empregadoDAO.deletar(empregado);
+		return "redirect:listarEmpregados";
 	}
 }
